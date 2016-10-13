@@ -33,6 +33,7 @@ function preload() {
 	cutlery = loadImage("assets/cutlery.png");
 	devil = loadImage("assets/devil.png");
 	exclamation = loadImage("assets/!.png");
+	fire = loadImage("assets/fire.png");
 	happy = loadImage("assets/happy.png");
 	hardWork = loadImage("assets/hardWork.png");
 	heart = loadImage("assets/heart.png");
@@ -53,7 +54,7 @@ function preload() {
 	sad = loadImage("assets/sad.png");
 	sick = loadImage("assets/sick.png");
 	sideEye = loadImage("assets/sideEye.png");
-	skull = loadImage("assets/skull.png");
+	skull= loadImage("assets/skull.png");
 	sleep = loadImage("assets/sleep.png");
 	snowflake = loadImage("assets/snowflake.png");
 	stoneFace = loadImage("assets/stoneFace.png");
@@ -61,6 +62,7 @@ function preload() {
 	weary = loadImage("assets/weary.png");
 	xSign = loadImage("assets/x.png");
 }
+
 
 function setup() {
 	colorGreen = color('#b0af99');
@@ -104,23 +106,18 @@ function emojiTest() {
 
 	var moveTextDown = 0;
 	for (var i = 0; i < feelings.length; i ++){
-		chkboxText = createP(feelings[i]);
-		chkboxText.position(windowWidth*0.25,windowHeight*0.08 + moveTextDown);
-    	
     	checkbox =  createInput(0,i,0);
     	checkbox.attribute("type","checkbox"); 
     	checkbox.position(windowWidth*0.20, windowHeight*0.10 + moveTextDown);
+    	// checkbox.attribute('checked', null); 
+
+    	chkboxText = createP(feelings[i]);
+		chkboxText.position(windowWidth*0.25,windowHeight*0.08 + moveTextDown);
 
     	moveTextDown += 20;
 
     	checkbox.value(i).name = feelings[i]; //set names for each box
     	checkboxArray.push(checkbox.value(i)); //put into array
-
-    	if (checkbox.value(i).elt.checked) {
-        	this.checkbox.value("on");
-    	} else {
-    		checkbox.value("off");
-    	}
 	}
 
     
@@ -135,41 +132,99 @@ function emojiTest() {
 	button.style('border-radius', '3px');
 	button.style('color', '#DFDFDF');
 	button.style('font-size','10px');
-	button.mousePressed(processResult);
+	button.mousePressed(resultPage);
+
 }
 
+var namesArray = []
+
 function processResult(){
+	// for (var i = 0; i < feelings.length; i ++){
+	// 	if (checkbox.value(i).elt.checked == true) {
+ //        	checkbox.value(i) =;
+ //    	} else {
+ //    		checkbox.value("off");
+ //    	}
+	// }
+	for (var i = 0; i < checkboxArray.length; i++){
+		if (checkboxArray[i].elt.checked == true) {
+			return checkboxArray[i].name
+		}
+	}
+}
+
+function resultPage() {
 	background(colorGrey);
 
+	if (processResult() == "afraid") {
+		image(xSign, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "amazed") {
+		image(exclamation, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "angry") {
+		image(fire, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "annoyed") {
+		image(xSign, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "anxious") {
+		image(sideEye, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "bitter") {
+		image(knife, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "cold") {
+		image(snowflake, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "confused") {
+		image(sideEye, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "congratulatory") {
+		image(cheers, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "dead"){
+		image(skull, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "festive") {
+		image(partyPopper, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "fly") {
+		image(cool, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "happy") {
+		image(happy, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "helpless") {
+		image(weary, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "hurt") {
+		image(brokenHeart, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "indifferent") {
+		image(help, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "interested") {
+		image(thumbsUp, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "loving") {
+		image(heartEyes, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "lucky") {
+		image(lucky, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "mischievous") {
+		image(stoneFace, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "nice") {
+		image(angel, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "rich") {
+		image(moneybag, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "sad") {
+		image(sad, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "sick") {
+		image(sick, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "surprised") {
+		image(joy, windowWidth*0.5, windowHeight*0.25);
+	} else if (processResult() == "tense") {
+		image(weary, windowWidth*0.5, windowHeight*0.25);
+	} 
+		
 
-	for (var i = 0; i < feelings.length; i++){
-		if (checkbox.value("on")) {
-			if (checkbox.value.name = "afraid"){
-				image(xSign, windowWidth*0.5, windowHeight*0.25);
-			} else {
-				
-			}
-			if (checkbox.value.name = "amazed"){
-				image(exclamation, windowWidth*0.5, windowHeight*0.25);
-			}
-		}
-		console.log(checkbox.elt.checked);
-	}
+	// textAlign(CENTER);
+	// textSize(20);
+	// fill(colorBlack);
+	// text("to try again press GO", windowWidth*0.5, windowHeight*0.75);
 
-
-	textAlign(CENTER);
-	textSize(20);
-	fill(colorBlack);
-	text("to try again press GO", windowWidth*0.5, windowHeight*0.75);
-
-	button.position(windowWidth*0.5 - 150 , windowHeight*0.8);
-	button.style('background', colorPink);
-	button.style('width', '300px');
-	button.style('height', '100px');
-	button.style('border-style', 'none');
-	button.style('border-radius', '5px');
-	button.style('color', colorGrey);
-	button.style('font-size','50px');
+	// button.position(windowWidth*0.5 - 150 , windowHeight*0.8);
+	// button.style('background', colorPink);
+	// button.style('width', '300px');
+	// button.style('height', '100px');
+	// button.style('border-style', 'none');
+	// button.style('border-radius', '5px');
+	// button.style('color', colorGrey);
+	// button.style('font-size','50px');
+	button.mousePressed(homePage);
 }
 
 
